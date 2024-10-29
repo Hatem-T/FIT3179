@@ -1,0 +1,181 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Air Quality Index (AQI) Correlations",
+    "anchor": "middle"
+  },
+  "background": "transparent",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 15,
+      "font": "Helvetica",
+      "fontWeight": "normal"
+    },
+    "text": {
+      "font": "Helvetica",
+      "fontWeight": "normal"
+    },
+    "axis": {
+      "labelFont": "Helvetica",
+      "labelFontWeight": "normal",
+      "titleFont": "Helvetica",
+      "titleFontWeight": "normal",
+      "grid": false
+    },
+    "legend": {
+      "labelFont": "Helvetica",
+      "labelFontWeight": "normal",
+      "titleFont": "Helvetica",
+      "titleFontWeight": "normal"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/refs/heads/main/A2/data/global_air_pollution_data.csv"
+  },
+  "columns": 2,
+  "concat": [
+    {
+      "width": 150,
+      "height": 200,
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "aqi_value",
+          "type": "quantitative",
+          "title": "Overall AQI",
+          "axis": {
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "aggregate": "mean",
+          "field": "co_aqi_value",
+          "type": "quantitative",
+          "title": "Mean AQI of Carbon Monoxide"
+        },
+        "tooltip": [
+          {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI"
+          },
+          {
+            "aggregate": "mean",
+            "field": "co_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Carbon Monoxide",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "width": 150,
+      "height": 200,
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "aqi_value",
+          "type": "quantitative",
+          "title": "Overall AQI",
+          "axis": {
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "aggregate": "mean",
+          "field": "ozone_aqi_value",
+          "type": "quantitative",
+          "title": "Mean AQI of Ozone"
+        },
+        "tooltip": [
+          {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI"
+          },
+          {
+            "aggregate": "mean",
+            "field": "ozone_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Ozone",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "width": 150,
+      "height": 200,
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "aqi_value",
+          "type": "quantitative",
+          "title": "Overall AQI",
+          "axis": {
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "aggregate": "mean",
+          "field": "no2_aqi_value",
+          "type": "quantitative",
+          "title": "Mean AQI of Nitrogen Dioxide"
+        },
+        "tooltip": [
+          {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI"
+          },
+          {
+            "aggregate": "mean",
+            "field": "no2_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Nitrogen Dioxide",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "width": 150,
+      "height": 200,
+      "mark": "point",
+      "encoding": {
+        "x": {
+          "field": "aqi_value",
+          "type": "quantitative",
+          "title": "Overall AQI",
+          "axis": {
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "aggregate": "mean",
+          "field": "pm_aqi_value",
+          "type": "quantitative",
+          "title": "Mean AQI of Particulate Matter"
+        },
+        "tooltip": [
+          {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI"
+          },
+          {
+            "aggregate": "mean",
+            "field": "pm_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Particulate Matter",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ]
+}

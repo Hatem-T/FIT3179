@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Air Quality Index Catagories",
+    "anchor": "middle"
+  },
+  "width": 300,
+  "height": 400,
+  "background": "transparent",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 15,
+      "font": "Helvetica",
+      "fontWeight": "normal"
+    },
+    "text": {
+      "font": "Helvetica",
+      "fontWeight": "normal"
+    },
+    "axis": {
+      "labelFont": "Helvetica",
+      "labelFontWeight": "normal",
+      "titleFont": "Helvetica",
+      "titleFontWeight": "normal"
+    },
+    "legend": {
+      "labelFont": "Helvetica",
+      "labelFontWeight": "normal",
+      "titleFont": "Helvetica",
+      "titleFontWeight": "normal"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/main/A2/data/global_air_pollution_data.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "count"
+        }
+      ],
+      "groupby": [
+        "aqi_category"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "count",
+          "as": "total"
+        }
+      ],
+      "frame": [
+        null,
+        null
+      ]
+    },
+    {
+      "calculate": "datum.count / datum.total * 100",
+      "as": "percentage"
+    }
+  ],
+  "mark": {
+    "type": "arc",
+    "innerRadius": 50
+  },
+  "encoding": {
+    "theta": {
+      "field": "percentage",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "aqi_category",
+      "title": "AQI Category",
+      "type": "nominal",
+      "scale": {
+        "scheme": "blues",
+        "reverse": true
+      }
+    },
+    "tooltip": [
+      {
+        "field": "aqi_category",
+        "type": "nominal",
+        "title": "AQI Category"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Percentage"
+      }
+    ]
+  }
+}
