@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Global Air Quality 2024 Visualisation</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- CSS file -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+    integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <div class="pure-g">
+
+    <div class="pure-u-1-3">
+
+      <h1>Global Air Quality 2024</h1>
+
+      <p>
+        Air quality is an essential aspect of life, as it affects our health, quality of life, and environment. In this
+        visualization, data sourced from eLichens, a company providing services and sensing solutions for hyper-local
+        air quality, covering 175 countries and over 300 cities, will be used to provide insights and analysis on global
+        air quality and how it’s impacted by air pollutants. AI was used in this visualisation to clean the data,  check text clarity, adjust fonts and code syntax for Vega-lite chart, and adjust the layout in CSS.
+
+        <br> <br> The data from 2024 includes overall air quality index (AQI) values for multiple locations around the
+        globe. The
+        AQI is a tool used by the Environmental Protection Agency (EPA) to communicate outdoor air quality and its
+        associated health risks. The higher the AQI number, the greater the level of air pollution and potential health
+        concern. Additionally, the data contains readings for several air pollutants, including carbon monoxide, ozone,
+        nitrogen dioxide, and particulate matter.
+
+        <br><br> The AQI system includes six color-coded categories, each corresponding to a range of values:
+
+      <ul>
+        <li><span class="aqi-category">AQI 0 to 50</span>: <span class="aqi-description">Good – This indicates
+            satisfactory air quality with little or no risk of air pollution.</span></li>
+        <li><span class="aqi-category">AQI 51 to 100</span>: <span class="aqi-description">Moderate – This indicates
+            acceptable air quality, though air pollution may pose a risk for some people, particularly those who are
+            sensitive to air pollution.</span></li>
+        <li><span class="aqi-category">AQI 101 to 150</span>: <span class="aqi-description">Unhealthy for Sensitive
+            Groups – Sensitive groups may experience health effects, while the general public is less likely to be
+            affected.</span></li>
+        <li><span class="aqi-category">AQI 151 to 200</span>: <span class="aqi-description">Unhealthy – Sensitive groups
+            may experience more serious health effects, and the general public may also be affected.</span></li>
+        <li><span class="aqi-category">AQI 201 to 300</span>: <span class="aqi-description">Very Unhealthy – Health
+            alert: everyone is at risk of health effects.</span></li>
+        <li><span class="aqi-category">AQI 301 and higher</span>: <span class="aqi-description">Hazardous – Health
+            warning of emergency conditions; everyone is more likely to experience serious health effects.</span></li>
+      </ul>
+
+
+      </p>
+    </div>
+
+    <div class="pure-u-1-2">
+      <div id="vis1"></div>
+    </div>
+
+    <div class="pure-u-1-3">
+      <p>
+
+        The choropleth map in the top right displays the average global overall AQI by country. Hovering over a country
+        will display its average AQI value.
+
+        <br> <br>As can be seen from the map, the country with the lowest average overall AQI is Bolivia at 23.79, which
+        puts it in the good AQI category. Looking at the other end of the spectrum, the country with the highest AQI is
+        South Korea at 421, which puts it in the hazardous AQI category. However, inspecting the data reveals that there
+        is only one AQI measurement taken in South Korea, specifically in Seoul, so this data point may be an outlier
+        due to some sensing errors or special circumstances. The next country with the highest AQI is Mauritania, with
+        an AQI value of 179, which puts it in the unhealthy AQI category.
+
+      </p>
+      <div id="vis2"></div>
+
+    </div>
+
+    <div class="pure-u-1-3">
+
+      <p>The donut chart shows the percentages for each AQI category in the data set. The AQI category with the highest
+        percentage is the good category at 42%. On the other hand, the AQI category with the lowest percentage is
+        hazardous, at less than 1%. This indicates that, overall, the global air quality is good.
+
+      <div id="vis3"></div>
+      </p>
+    </div>
+    <div class="pure-u-1-3">
+      <p>The scatter plot matrix shows the overall AQI correlations with the mean of different air pollutants.
+
+        <br> <br>The top left scatter plot explores the correlation between the overall AQI and the mean AQI of carbon
+        dioxide, which is a colorless and odorless gas released into the air by burning fossil fuels, such as driving
+        cars and trucks. Breathing in carbon dioxide can reduce oxygen levels in the bloodstream, causing health issues.
+        Observing the scatter plot, it indicates that there is a weak correlation between the overall AQI and the carbon
+        dioxide AQI.
+
+
+        <br> <br>The top right scatter plot explores the correlation between the overall AQI and the mean AQI of ozone,
+        which is a molecule that is harmful to outdoor air quality if it is at ground level. Observing the scatter plot,
+        it indicates that there is a positive correlation between the overall AQI and the ozone AQI for overall AQI
+        values less than 200. For overall AQI values above 200, there appears to be a weak correlation with the ozone
+        AQI.
+
+        <br><br>The bottom left scatter plot explores the correlation between the overall AQI and the mean AQI of
+        nitrogen dioxide, which, when exposed to in short periods, can irritate respiratory diseases, putting people
+        with asthma, children, and the elderly at risk of health effects. Observing the scatter plot, it indicates that
+        there is a weak correlation between the overall AQI and the nitrogen dioxide AQI.
+
+        <br><br>The bottom right scatter plot explores the correlation between the overall AQI and the mean AQI of
+        particulate matter, which consists of small solid and liquid particles with a diameter of 2.5 micrometers or
+        less that spread in the air. Upon inhalation, they can cause serious heart and lung issues, and they have been
+        classified as a group 1 carcinogen by the International Agency for Research on Cancer (IARC). Observing the
+        scatter plot, it indicates that there is a positive correlation between the overall AQI and the particulate
+        matter AQI.
+      </p>
+    </div>
+
+    <div class="pure-u-1-4">
+      <h4>Designer: Hatem Talal Alghamdi</h4>
+    </div>
+
+    <div class="pure-u-1-4">
+      <h4>Data: https://shorturl.at/3NvZr</h4>
+    </div>
+
+    <div class="pure-u-1-4">
+      <h4>Resources: https://shorturl.at/SG28K and https://shorturl.at/ZLtwR</h4>
+    </div>
+
+    <div class="pure-u-1-4">
+      <h4>Date: 29/10/2024</h4>
+    </div>
+
+
+
+
+  </div>
+
+</body>
+
+<script>
+  const spec1 = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Average Global Air Quality index Per Country 2024",
+    "width": 998,
+    "height": 600,
+    "background": "transparent",
+    "config": {
+      "view": {
+        "stroke": null
+      },
+      "title": {
+        "fontSize": 15,
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "text": {
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "axis": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal"
+      },
+      "legend": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal"
+      }
+    },
+    "data": {
+      "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/refs/heads/main/A2/js/ne_110m_admin_0_countries.topojson",
+      "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
+    },
+    "projection": { "type": "mercator" },
+    "layer": [
+      {
+        "transform": [
+          { "calculate": "'Data is not available in ' + datum.properties.NAME", "as": "note" }
+        ],
+        "mark": { "type": "geoshape", "fill": "lightgray" },
+        "encoding": {
+          "tooltip": {
+            "field": "note"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "lookup": "properties.NAME",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/refs/heads/main/A2/data/average_aqi_by_country.csv"
+              },
+              "key": "country_name",
+              "fields": ["avg_aqi_value"]
+            }
+          },
+
+          {
+            "calculate": "datum.properties.NAME",
+            "as": "country_name_check"
+          }
+        ],
+        "mark": { "type": "geoshape" },
+        "encoding": {
+          "color": {
+            "field": "avg_aqi_value",
+            "type": "quantitative",
+            "title": "Average AQI",
+            "scale": { "type": "log", "scheme": "blues" }
+          },
+          "tooltip": [
+            { "field": "properties.NAME", "type": "nominal", "title": "Country" },
+            { "field": "avg_aqi_value", "type": "quantitative", "title": "Average AQI", "format": ".2f" },
+          ]
+        }
+      }
+    ]
+
+  }
+
+  const spec2 = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Air Quality Index Catagories",
+      "anchor": "middle"
+    },
+    "width": 300,
+    "height": 400,
+    "background": "transparent",
+    "config": {
+      "view": {
+        "stroke": null
+      },
+      "title": {
+        "fontSize": 15,
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "text": {
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "axis": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal"
+      },
+      "legend": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal"
+      }
+    },
+    "data": {
+      "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/main/A2/data/global_air_pollution_data.csv"
+    },
+    "transform": [
+      {
+        "aggregate": [{ "op": "count", "as": "count" }],
+        "groupby": ["aqi_category"]
+      },
+      {
+        "window": [{ "op": "sum", "field": "count", "as": "total" }],
+        "frame": [null, null]
+      },
+      {
+        "calculate": "datum.count / datum.total * 100",
+        "as": "percentage"
+      }
+    ],
+    "mark": { "type": "arc", "innerRadius": 50 },
+    "encoding": {
+      "theta": { "field": "percentage", "type": "quantitative" },
+      "color": {
+        "field": "aqi_category",
+        "title": "AQI Category",
+        "type": "nominal",
+        "scale": { "scheme": "blues", "reverse": true }
+      },
+      "tooltip": [
+        { "field": "aqi_category", "type": "nominal", "title": "AQI Category" },
+        { "field": "percentage", "type": "quantitative", "format": ".2f", "title": "Percentage" }
+      ]
+    }
+  }
+
+  const spec3 = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Air Quality Index (AQI) Correlations",
+      "anchor": "middle"
+    },
+
+    "background": "transparent",
+    "config": {
+      "view": {
+        "stroke": null
+      },
+      "title": {
+        "fontSize": 15,
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "text": {
+        "font": "Helvetica",
+        "fontWeight": "normal"
+      },
+      "axis": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal",
+        "grid": false
+      },
+      "legend": {
+        "labelFont": "Helvetica",
+        "labelFontWeight": "normal",
+        "titleFont": "Helvetica",
+        "titleFontWeight": "normal"
+      }
+    },
+    "data": {
+      "url": "https://raw.githubusercontent.com/Hatem-T/FIT3179/refs/heads/main/A2/data/global_air_pollution_data.csv"
+    },
+    "columns": 2,
+    "concat": [
+      {
+        "width": 200,
+        "height": 200,
+        "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI",
+            "axis": { "tickCount": 10 }
+          },
+          "y": {
+            "aggregate": "mean",
+            "field": "co_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Carbon Monoxide"
+          },
+          "tooltip": [
+            { "field": "aqi_value", "type": "quantitative", "title": "Overall AQI" },
+            { "aggregate": "mean", "field": "co_aqi_value", "type": "quantitative", "title": "Mean AQI of Carbon Monoxide", "format": ".2f" }
+          ]
+        }
+      },
+      {
+        "width": 200,
+        "height": 200,
+        "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI",
+            "axis": { "tickCount": 10 }
+          },
+          "y": {
+            "aggregate": "mean",
+            "field": "ozone_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Ozone"
+          },
+          "tooltip": [
+            { "field": "aqi_value", "type": "quantitative", "title": "Overall AQI" },
+            { "aggregate": "mean", "field": "ozone_aqi_value", "type": "quantitative", "title": "Mean AQI of Ozone", "format": ".2f" }
+          ]
+        }
+      },
+      {
+        "width": 200,
+        "height": 200,
+        "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI",
+            "axis": { "tickCount": 10 }
+          },
+          "y": {
+            "aggregate": "mean",
+            "field": "no2_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Nitrogen Dioxide"
+          },
+          "tooltip": [
+            { "field": "aqi_value", "type": "quantitative", "title": "Overall AQI" },
+            { "aggregate": "mean", "field": "no2_aqi_value", "type": "quantitative", "title": "Mean AQI of Nitrogen Dioxide", "format": ".2f" }
+          ]
+        }
+      },
+      {
+        "width": 200,
+        "height": 200,
+        "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "aqi_value",
+            "type": "quantitative",
+            "title": "Overall AQI",
+            "axis": { "tickCount": 10 }
+          },
+          "y": {
+            "aggregate": "mean",
+            "field": "pm_aqi_value",
+            "type": "quantitative",
+            "title": "Mean AQI of Particulate Matter"
+          },
+          "tooltip": [
+            { "field": "aqi_value", "type": "quantitative", "title": "Overall AQI" },
+            { "aggregate": "mean", "field": "pm_aqi_value", "type": "quantitative", "title": "Mean AQI of Particulate Matter", "format": ".2f" }
+          ]
+        }
+      }
+    ]
+  }
+
+  vegaEmbed("#vis1", spec1).then(console.log).catch(console.warn);
+  vegaEmbed("#vis2", spec2).then(console.log).catch(console.warn);
+  vegaEmbed("#vis3", spec3).then(console.log).catch(console.warn);
+</script>
+
+</html>
